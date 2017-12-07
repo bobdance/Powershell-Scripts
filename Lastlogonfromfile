@@ -1,0 +1,11 @@
+$LastMonth = $(((Get-Date).AddDays(-60)).ToFileTime())
+$Devices = get-content C:\4041678.txt
+  
+foreach ($Device in $Devices){
+
+Get-ADComputer -Filter {(samaccountname$ -like "$device") -and (lastlogondate -like "$LastMonth") } -Properties OperatingSystem,LastLogonDate, SamAccountName, Enabled 
+
+}
+
+
+#| Export-csv c:\loggedinlast60days.csv -Append
